@@ -70,12 +70,12 @@ public class SpiderLeg implements CrawlingProcess
     catch (IOException ioe)
     {
       LOGGER.error("Connection could not be made to Link" + url);
-      throw new LinkConnectionException();
+      throw new LinkConnectionException("The connection could not be made to link", ioe);
     }
     catch (Exception e)
     {
       LOGGER.error("Unexpected error occured with url "+ url);
-      throw new UnexpectedProcessException("Unexpected error occured");
+      throw new UnexpectedProcessException("Unexpected error occured", e);
     }
 
   }

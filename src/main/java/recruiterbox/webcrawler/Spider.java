@@ -74,17 +74,27 @@ public class Spider implements Crawler
       }
       catch (CrawlingException ce)                             // If a url could not be visited, do not count it as visited.
       { 
+        LOGGER.error("Invalid Link",ce);
         urlVisited.remove(currentUrl);
       }
       catch (LinkConnectionException lce)
       {
+        LOGGER.error("Connection could not be made",lce);
         urlVisited.remove(currentUrl);
       }
       catch (UnexpectedProcessException upe)
       {
+        LOGGER.error("Unexpected error",upe);
         urlVisited.remove(currentUrl);
       }
 
+      // If first url passed was invalid or after some link was removed from
+      // urlVisited(because of some exception that occurred while visiting
+      // it)and ultimately could not be visited, then break the loop since there
+      // are no more links available to visit now.
+      if(urlVisited.size() == 0) {
+        break;
+      }
       this.urlsToVisit.addAll(spiderLeg.getLinks());
     }
     LOGGER.info(MAX_NUMBER_OF_URLS + " LInks visited Successfully");

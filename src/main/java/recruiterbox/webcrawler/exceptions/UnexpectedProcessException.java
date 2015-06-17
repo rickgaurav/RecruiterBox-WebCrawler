@@ -1,5 +1,10 @@
 package recruiterbox.webcrawler.exceptions;
 
+
+/**
+ * @author gaurav.kumar
+ * A class that represent an exception which will be thrown when link could be parsed for some reason. 
+ */
 public class UnexpectedProcessException extends Exception
 {
   public UnexpectedProcessException() {
